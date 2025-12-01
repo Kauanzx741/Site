@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doces Mania - Receitas do Raimundo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset e configurações gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rosa-claro: #f9e4e8;
+            --rosa-medio: #f2b8c6;
+            --rosa-escuro: #e691a9;
+            --creme: #fff9f0;
+            --marrom: #8b4513;
+            --marrom-claro: #a0522d;
+            --cinza: #555;
+            --branco: #fff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--cinza);
+            background-color: var(--creme);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--marrom);
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--rosa-escuro);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--marrom-claro);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--rosa-escuro);
+            color: var(--branco);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--marrom-claro);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: var(--branco);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            margin: 0;
+            color: var(--rosa-escuro);
+        }
+
+        .logo span {
+            color: var(--marrom);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav li {
+            margin-left: 30px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--cinza);
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--rosa-escuro);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--rosa-escuro);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--marrom);
+        }
+
+        /* Banner Principal */
+        .hero {
+            background: linear-gradient(rgba(255, 249, 240, 0.9), rgba(255, 249, 240, 0.9)), url('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: var(--rosa-escuro);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--marrom);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Receitas em Destaque */
+        .featured-recipes {
+            background-color: var(--branco);
+        }
+
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .recipe-card {
+            background-color: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .recipe-img {
+            height: 200px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .recipe-content {
+            padding: 20px;
+        }
+
+        .recipe-content h3 {
+            margin-bottom: 10px;
+        }
+
+        .recipe-content p {
+            color: var(--cinza);
+            margin-bottom: 15px;
+        }
+
+        .recipe-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background-color: var(--rosa-claro);
+            color: var(--rosa-escuro);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Página de Receitas */
+        .recipes-page {
+            padding-top: 150px;
+        }
+
+        .recipes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .full-recipe-card {
+            background-color: var(--branco);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .full-recipe-img {
+            height: 250px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .full-recipe-content {
+            padding: 25px;
+        }
+
+        .recipe-ingredients h4, .recipe-instructions h4 {
+            margin-top: 20px;
+            color: var(--marrom);
+            border-bottom: 2px solid var(--rosa-claro);
+            padding-bottom: 5px;
+        }
+
+        .recipe-ingredients ul, .recipe-instructions ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .recipe-ingredients li, .recipe-instructions li {
+            margin-bottom: 8px;
+        }
+
+        /* Página Sobre */
+        .about-page {
+            padding-top: 150px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 40px;
+            border: 8px solid var(--rosa-claro);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text {
+            max-width: 800px;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background-color: var(--rosa-claro);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--marrom);
+            font-size: 1.2rem;
+        }
+
+        /* Página E-book */
+        .ebook-page {
+            padding-top: 150px;
+            text-align: center;
+        }
+
+        .ebook-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--branco);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .ebook-cover {
+            width: 250px;
+            height: 350px;
+            background-color: var(--rosa-medio);
+            border-radius: 10px;
+            margin: 0 auto 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--branco);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .ebook-cover h3 {
+            color: var(--branco);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .ebook-cover p {
+            font-size: 1.2rem;
+        }
+
+        .ebook-description {
+            margin-bottom: 40px;
+        }
+
+        .ebook-description p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .ebook-features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px;
+            max-width: 200px;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: var(--rosa-escuro);
+            margin-bottom: 15px;
+        }
+
+        .download-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .download-form input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--rosa-claro);
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .download-form input:focus {
+            border-color: var(--rosa-escuro);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--marrom);
+            color: var(--branco);
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--branco);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .footer-column a:hover {
+            color: var(--rosa-medio);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--rosa-escuro);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero h1 {
+                font-size: 3.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--branco);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            nav ul.active {
+                left: 0;
+            }
+            
+            nav li {
+                margin: 15px 0;
+            }
+            
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .ebook-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .recipes-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header com Navegação -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Doces <span>Mania</span></h1>
+            </div>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#recipes">Receitas</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#ebook">E-book</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Página Inicial -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Doces Mania</h1>
+            <p>Descubra o sabor da felicidade em cada receita criada com paixão pelo mestre confeiteiro Raimundo. Doces artesanais que transformam momentos simples em memórias inesquecíveis.</p>
+            <a href="#ebook" class="btn">Baixar E-book Grátis</a>
+        </div>
+    </section>
+
+    <!-- Receitas em Destaque -->
+    <section class="featured-recipes">
+        <div class="container">
+            <h2>Receitas Mais Populares</h2>
+            <div class="recipe-grid">
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1089&q=80')"></div>
+                    <div class="recipe-content">
+                        <h3>Brigadeiro Gourmet</h3>
+                        <p>O clássico brasileiro com um toque especial do Raimundo. Cremoso, saboroso e simples de fazer.</p>
+                        <div class="recipe-tags">
+                            <span class="tag">Fácil</span>
+                            <span class="tag">30min</span>
+                            <span class="tag">Chocolate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80')"></div>
+                    <div class="recipe-content">
+                        <h3>Torta de Limão</h3>
+                        <p>Massa crocante, reino cremoso e o equilíbrio perfeito entre o doce e o ácido.</p>
+                        <div class="recipe-tags">
+                            <span class="tag">Médio</span>
+                            <span class="tag">1h30min</span>
+                            <span class="tag">Frutas</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recipe-card">
+                    <div class="recipe-img" style="background-image: url('https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80')"></div>
+                    <div class="recipe-content">
+                        <h3>Beijinhos de Coco</h3>
+                        <p>Delícias de coco com uma textura única que derrete na boca. Simplesmente irresistíveis!</p>
+                        <div class="recipe-tags">
+                            <span class="tag">Fácil</span>
+                            <span class="tag">40min</span>
+                            <span class="tag">Coco</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Página de Receitas (simulada em uma seção) -->
+    <section id="recipes" class="recipes-page">
+        <div class="container">
+            <h2>Nossas Receitas</h2>
+            <div class="recipes-container">
+                <div class="full-recipe-card">
+                    <div class="full-recipe-img" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1089&q=80')"></div>
+                    <div class="full-recipe-content">
+                        <h3>Brigadeiro Gourmet</h3>
+                        <div class="recipe-ingredients">
+                            <h4>Ingredientes</h4>
+                            <ul>
+                                <li>1 lata de leite condensado</li>
+                                <li>2 colheres de sopa de chocolate em pó 50% cacau</li>
+                                <li>1 colher de sopa de manteiga sem sal</li>
+                                <li>Chocolate granulado para decorar</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-instructions">
+                            <h4>Modo de Preparo</h4>
+                            <ol>
+                                <li>Em uma panela, misture o leite condensado, o chocolate em pó e a manteiga.</li>
+                                <li>Cozinhe em fogo médio, mexendo sem parar, até desgrudar do fundo da panela.</li>
+                                <li>Transfira para um prato untado com manteiga e deixe esfriar.</li>
+                                <li>Com as mãos untadas, faça bolinhas e passe no chocolate granulado.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="full-recipe-card">
+                    <div
